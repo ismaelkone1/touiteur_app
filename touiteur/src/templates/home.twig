@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Accueil</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Touiteur</h1>
+
+{% if touites is not empty %}
+    <h2>Derniers Touites</h2>
+    <ul>
+        {% for touite in touites %}
+            <li>
+                <p>{{ touite.Contenu }}</p>
+                <p>Publié par {{ touite.utilisateur.username }} le {{ touite.Date_de_publication|date('Y-m-d H:i:s') }}</p>
+                {% if touite.Image is not null %}
+                    <img src="{{ touite.Image }}" alt="Image du touite">
+                {% endif %}
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun touite n'est disponible pour le moment.</p>
+{% endif %}
+
+<p>Vous n'avez pas de compte ? <a href="/register">Inscrivez-vous</a></p>
+<a href="/login">Se connecter</a>
+</body>
+</html>

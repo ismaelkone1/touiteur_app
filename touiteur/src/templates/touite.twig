@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h1>Liste des Touites</h1>
+
+    {% if touites is empty %}
+        <p>Aucun touite n'est disponible pour le moment.</p>
+    {% else %}
+        <ul>
+            {% for touite in touites %}
+                <li>
+                    <p>{{ touite.Contenu }}</p>
+                    <p>Publié par {{ touite.utilisateur.username }} le {{ touite.Date_de_publication|date('Y-m-d H:i:s') }}</p>
+                    {% if touite.Image is not null %}
+                        <img src="{{ touite.Image }}" alt="Image du touite">
+                    {% endif %}
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
